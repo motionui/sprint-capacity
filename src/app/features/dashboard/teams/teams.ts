@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Page } from '@motionui/ui-lib';
-import { ExercisesService } from '../../../services/exercises.service';
 
 @Component({
   selector: 'teams',
@@ -11,6 +10,4 @@ import { ExercisesService } from '../../../services/exercises.service';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Teams {
-  protected exercisesService = inject(ExercisesService);
-}
+export class Teams {}

@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { Page } from '@motionui/ui-lib';
-import { catchError, EMPTY, filter, switchMap } from 'rxjs';
+import { catchError, EMPTY, filter, switchMap, take } from 'rxjs';
 import { Role, RolesService } from '../../../services/roles.service';
 import { Todos } from '../containers/todos/todos';
 import { RoleDialog } from './role-dialog/role-dialog';
@@ -44,6 +44,7 @@ export class Roles {
     dialogRef
       .afterClosed()
       .pipe(
+        take(1),
         filter((result): result is Role => !!result && !result.id),
         switchMap((role) =>
           this.rolesService.addRole$(role).pipe(
@@ -71,6 +72,7 @@ export class Roles {
     dialogRef
       .afterClosed()
       .pipe(
+        take(1),
         filter((result): result is Role => !!result && result.id),
         switchMap((role) =>
           this.rolesService.updateRole$(role).pipe(
@@ -91,6 +93,7 @@ export class Roles {
     this.rolesService
       .deleteRole$(role)
       .pipe(
+        take(1),
         catchError((error) => {
           this.snackBar.open(error.message, 'OK', {
             horizontalPosition: 'right',

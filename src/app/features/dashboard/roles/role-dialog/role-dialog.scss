@@ -1,6 +1,10 @@
 @use '@motionui/ui-lib/styles/spacing' as spacing;
 @use '@motionui/ui-lib/styles/color' as color;
 
+::ng-deep .mat-mdc-button-base .mat-icon.openai-icon {
+  min-height: unset;
+}
+
 .role-form {
   width: 100%;
   padding-top: spacing.$px-per-unit * 2;
@@ -23,5 +27,25 @@
   button {
     width: 50%;
     flex: 1;
+  }
+}
+
+.openai-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
