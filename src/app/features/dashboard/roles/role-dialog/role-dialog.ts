@@ -7,8 +7,12 @@ import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatD
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { take } from 'rxjs';
 import { ENTITY_DESCRIPTION_MAX_LENGTH, ENTITY_NAME_MAX_LENGTH, ENTITY_NAME_MIN_LENGTH } from '../../../../common/constants';
+import { OpenaiService } from '../../../../services/openai.service';
 import { Role } from '../../../../services/roles.service';
 
 export type RoleDialogData = {
@@ -28,6 +32,7 @@ type RoleFormModel = Role;
     MatDialogContent,
     MatDialogActions,
     MatIconModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     Field,
   ],
@@ -39,6 +44,8 @@ type RoleFormModel = Role;
 export class RoleDialog {
   protected dialogData = inject<RoleDialogData>(MAT_DIALOG_DATA);
   protected dialogRef = inject(MatDialogRef<RoleDialog>);
+  private openaiService = inject(OpenaiService);
+  private snackBar = inject(MatSnackBar);
 
   protected formModel = signal<RoleFormModel>(
     this.dialogData.role
@@ -69,6 +76,31 @@ export class RoleDialog {
       message: `Role description cannot exceed ${ENTITY_DESCRIPTION_MAX_LENGTH} characters`,
     });
   });
+
+  protected apiInProgress = signal<boolean>(false);
+  protected apiSuggestion = signal<string>('');
+
+  onClickGetSuggestions = (role: string): void => {
+    this.apiInProgress.set(true);
+    this.apiSuggestion.set('');
+
+    this.openaiService
+      .generateRoleDescription(role)
+      .pipe(take(1))
+      .subscribe({
+        next: (result) => {
+          this.apiInProgress.set(false);
+          this.apiSuggestion.set(result);
+        },
+        error: (error) => {
+          this.apiInProgress.set(false);
+          this.snackBar.open(error.message, 'OK', {
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+          });
+        },
+      });
+  };
 
   onClickSave = (): void => {
     this.dialogRef.close({

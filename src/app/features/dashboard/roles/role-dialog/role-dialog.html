@@ -21,16 +21,17 @@
     <mat-form-field class="form-field">
       <mat-label>Description</mat-label>
       <input matInput type="text" [field]="roleForm.description" />
-      @if (roleForm.description().value()) {
+      @let role = roleForm.name().value();
+      @if (role) {
         <button
           type="button"
           matSuffix
           matIconButton
-          aria-label="Clear"
+          matTooltip="Get suggestions from OpenAI"
           tabindex="-1"
-          (click)="roleForm.description().value.set('')"
+          (click)="onClickGetSuggestions(role)"
         >
-          <mat-icon>close</mat-icon>
+          <mat-icon svgIcon="openai" class="openai-icon" [class.spinning]="apiInProgress()"></mat-icon>
         </button>
       }
       @if (roleForm.description().touched() && roleForm.description().invalid()) {
