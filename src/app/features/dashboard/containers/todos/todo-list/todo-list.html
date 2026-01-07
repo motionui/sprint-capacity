@@ -1,0 +1,5 @@
+<div class="todo-list">
+  @for (todo of todos(); track todo.id) {
+    <todo-item [todo]="todo"></todo-item>
+  }
+</div>

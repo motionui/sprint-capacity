@@ -1,0 +1,9 @@
+<div class="todo-item" [class.selected]="selectedTodo()?.id === todo().id">
+  <div class="task-info">
+    <mat-checkbox [checked]="todo().completed" (change)="onToggleTodoCompleted()"> </mat-checkbox>
+    <span class="text-overflow task-text" (click)="onSelectTodo()" [matTooltip]="todo().task">{{ todo().task }}</span>
+  </div>
+  <button mat-icon-button class="delete-button" (click)="onDeleteTodo()">
+    <mat-icon class="delete-icon">delete_forever</mat-icon>
+  </button>
+</div>

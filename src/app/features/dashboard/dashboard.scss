@@ -1,0 +1,14 @@
+@use '@motionui/ui-lib/styles/spacing' as spacing;
+@use '@motionui/ui-lib/styles/color' as color;
+
+.dashboard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav {
+  width: 100%;
+  height: 100%;
+}

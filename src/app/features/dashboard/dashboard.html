@@ -1,0 +1,7 @@
+<div class="dashboard">
+  <topnav [menuItems]="topnavMenuItems()"></topnav>
+
+  <sidenav class="sidenav" [menuItems]="sidenavMenuItems()">
+    <router-outlet sidenav-content />
+  </sidenav>
+</div>

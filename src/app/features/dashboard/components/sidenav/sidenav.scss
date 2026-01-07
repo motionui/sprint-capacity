@@ -1,0 +1,107 @@
+@use '@motionui/ui-lib/styles/spacing' as spacing;
+@use '@motionui/ui-lib/styles/color' as color;
+
+$sidenav-width-expanded: 240px;
+$sidenav-width-collapsed: 72px;
+
+::ng-deep .sidenav-container {
+  .sidenav.mat-drawer-side {
+    border-right: none;
+    border-bottom-right-radius: 0;
+  }
+
+  .mdc-list-item__secondary-text::before {
+    height: unset;
+  }
+}
+
+.sidenav-container {
+  width: 100%;
+  height: 100%;
+  background-color: color.$primary-color;
+
+  .sidenav {
+    width: $sidenav-width-expanded !important;
+    transition: width 0.35s ease-in-out;
+  }
+
+  .sidenav-content {
+    border-top-left-radius: 16px;
+
+    margin-left: $sidenav-width-expanded + 10px !important;
+    transition: margin-left 0.35s ease-in-out;
+  }
+
+  &.collapsed {
+    .sidenav {
+      width: $sidenav-width-collapsed !important;
+    }
+
+    .sidenav-content {
+      margin-left: $sidenav-width-collapsed + 10px !important;
+    }
+  }
+}
+
+.sidenav-menu {
+  // height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$px-per-unit * 8;
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .icon {
+      cursor: pointer;
+      background-color: color.$primary-selected-color;
+      border-bottom-left-radius: 16px;
+      padding: spacing.$px-per-unit * 2 spacing.$px-per-unit * 3;
+      font-size: 24px;
+      color: color.$primary-color;
+    }
+  }
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$px-per-unit * 2;
+  padding: 0 spacing.$px-per-unit * 4;
+
+  .list-item {
+    padding: 0;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: spacing.$px-per-unit * 1;
+
+    .icon {
+      width: 24px;
+      margin: 0;
+      padding: 0 spacing.$px-per-unit * 2;
+      font-size: 24px;
+      color: color.$primary-color;
+    }
+
+    .label {
+      font-size: 16px;
+      color: color.$primary-color;
+
+      opacity: 1;
+      transition: opacity 0.35s ease-in-out;
+
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .active-link {
+    background-color: color.$primary-selected-color;
+  }
+}

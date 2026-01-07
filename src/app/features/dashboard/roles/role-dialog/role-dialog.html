@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>{{ !dialogData.role ? 'Add New Role' : 'Update Role' }}</h2>
+<mat-dialog-content>
+  <form class="role-form">
+    <!-- role name -->
+    <mat-form-field class="form-field">
+      <mat-label>Role</mat-label>
+      <input matInput type="text" [field]="roleForm.name" />
+      @if (roleForm.name().value()) {
+        <button type="button" matSuffix matIconButton aria-label="Clear" tabindex="-1" (click)="roleForm.name().value.set('')">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      @if (roleForm.name().touched() && roleForm.name().invalid()) {
+        @for (error of roleForm.name().errors(); track error.kind) {
+          <mat-error>{{ error.message }}</mat-error>
+        }
+      }
+    </mat-form-field>
+
+    <!-- role description -->
+    <mat-form-field class="form-field">
+      <mat-label>Description</mat-label>
+      <input matInput type="text" [field]="roleForm.description" />
+      @if (roleForm.description().value()) {
+        <button
+          type="button"
+          matSuffix
+          matIconButton
+          aria-label="Clear"
+          tabindex="-1"
+          (click)="roleForm.description().value.set('')"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      @if (roleForm.description().touched() && roleForm.description().invalid()) {
+        @for (error of roleForm.description().errors(); track error.kind) {
+          <mat-error>{{ error.message }}</mat-error>
+        }
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="actions">
+    <button
+      matButton="filled"
+      color="second"
+      cdkFocusInitial
+      [disabled]="roleForm().invalid() || !roleForm().dirty()"
+      (click)="onClickSave()"
+    >
+      {{ !dialogData.role ? 'Save' : 'Update' }}
+    </button>
+    <button matButton="outlined" color="primary" (click)="dialogRef.close()">Cancel</button>
+  </div>
+</mat-dialog-actions>

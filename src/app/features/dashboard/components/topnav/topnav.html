@@ -1,0 +1,16 @@
+<mat-toolbar class="topnav">
+  <a class="logo-link" target="_blank" href="https://www.linkedin.com/in/edwin-kwok/">
+    <img class="logo" src="images/motion-ui-logo-white.svg" alt="motion ui logo" />
+    <h1 class="header">Motion UI</h1>
+  </a>
+
+  <mat-nav-list class="nav-list">
+    @for (item of menuItems(); track item.id) {
+      <mat-list-item class="list-item" [routerLink]="item.routerLink" routerLinkActive="active-link">
+        <mat-icon matListItemIcon class="icon">{{ item.icon }}</mat-icon>
+        <span matLine class="label">{{ item.label }}</span>
+        <!-- <span matListItemTitle class="label" [class.hidden]="!isExpanded()" [hidden]="!isExpanded()">{{ item.label }}</span> -->
+      </mat-list-item>
+    }
+  </mat-nav-list>
+</mat-toolbar>

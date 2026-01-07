@@ -1,0 +1,83 @@
+@use '@motionui/ui-lib/styles/spacing' as spacing;
+@use '@motionui/ui-lib/styles/color' as color;
+
+::ng-deep .topnav {
+  .mat-mdc-list-item,
+  .mat-mdc-list-option {
+    width: auto;
+    padding: 0 16px;
+  }
+}
+
+.topnav {
+  height: spacing.$px-per-unit * 14;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: spacing.$px-per-unit * 5;
+  background-color: color.$primary-color;
+
+  a {
+    text-decoration: none;
+
+    &.active {
+      text-decoration: none;
+    }
+  }
+}
+
+.logo-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: spacing.$px-per-unit * 4;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.header {
+  font-size: 24px;
+  color: color.$white;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: spacing.$px-per-unit * 8;
+
+  .list-item {
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: spacing.$px-per-unit * 1;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      padding: 0 spacing.$px-per-unit * 2 0 0;
+      font-size: 24px;
+      color: color.$white;
+    }
+
+    .label {
+      transition: opacity 0.35s ease;
+      font-size: 16px;
+      color: color.$white;
+
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.active-link {
+  background-color: color.$primary-selected-color;
+}

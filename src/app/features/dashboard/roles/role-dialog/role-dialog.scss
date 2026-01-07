@@ -1,0 +1,27 @@
+@use '@motionui/ui-lib/styles/spacing' as spacing;
+@use '@motionui/ui-lib/styles/color' as color;
+
+.role-form {
+  width: 100%;
+  padding-top: spacing.$px-per-unit * 2;
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$px-per-unit * 4;
+}
+
+.form-field {
+  flex: 1;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: spacing.$px-per-unit * 2;
+
+  button {
+    width: 50%;
+    flex: 1;
+  }
+}

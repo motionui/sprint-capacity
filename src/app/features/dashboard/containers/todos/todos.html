@@ -1,0 +1,52 @@
+<mat-card class="todos" appearance="outlined">
+  <mat-card-header>
+    <mat-card-subtitle>
+      <h3>Todo List</h3>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="content">
+      <mat-form-field class="task-input" subscriptSizing="dynamic">
+        <mat-label>Task</mat-label>
+        <input
+          #taskInput
+          matInput
+          placeholder="Enter a task and press Enter"
+          type="text"
+          [value]="selectedTodo()?.task"
+          (keyup.enter)="onEnterTask(taskInput, taskInput.value)"
+        />
+        @if (taskInput.value) {
+          <button type="button" matSuffix matIconButton aria-label="Clear" tabindex="-1" (click)="taskInput.value = ''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+
+      <mat-radio-group
+        aria-label="Select an option"
+        class="task-filters"
+        [ngModel]="selectedFilter()"
+        (ngModelChange)="selectedFilter.set($event)"
+      >
+        <mat-radio-button value="all">All</mat-radio-button>
+        <mat-radio-button value="pending">Pending</mat-radio-button>
+        <mat-radio-button value="completed">Completed</mat-radio-button>
+      </mat-radio-group>
+
+      @if (loading()) {
+        <div class="loading-spinner">
+          <mat-spinner diameter="20" strokeWidth="3"></mat-spinner>
+          <p>Loading todos, please wait...</p>
+        </div>
+      } @else {
+        @if (todos().length === 0) {
+          <div class="no-tasks">No tasks available. Add a new task above.</div>
+        } @else {
+          <todo-list [todos]="filteredTodos()"></todo-list>
+        }
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

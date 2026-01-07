@@ -1,0 +1,86 @@
+<mat-card class="registration" appearance="outlined">
+  <mat-card-header>
+    <mat-card-subtitle>
+      <h3>Registration</h3>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form class="registration-form" (submit)="onSubmit($event)">
+      <!-- email -->
+      <mat-form-field class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="user@company.com" type="email" [field]="registrationForm.email" />
+        @if (registrationForm.email().value()) {
+          <button
+            type="button"
+            matSuffix
+            matIconButton
+            aria-label="Clear"
+            tabindex="-1"
+            (click)="registrationForm.email().value.set('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+        <!-- https://github.com/angular/components/issues/32398 -->
+        @if (registrationForm.email().touched() && registrationForm.email().invalid()) {
+          @for (error of registrationForm.email().errors(); track error.kind) {
+            <mat-error>{{ error.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <!-- password -->
+      <mat-form-field class="form-field">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" type="password" [field]="registrationForm.password" />
+        @if (registrationForm.password().value()) {
+          <button
+            type="button"
+            matSuffix
+            matIconButton
+            aria-label="Clear"
+            tabindex="-1"
+            (click)="registrationForm.password().value.set('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+        @if (registrationForm.password().touched() && registrationForm.password().invalid()) {
+          @for (error of registrationForm.password().errors(); track error.kind) {
+            <mat-error>{{ error.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <!-- confirm password -->
+      <mat-form-field class="form-field">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput placeholder="Re-type your password" type="password" [field]="registrationForm.confirmPassword" />
+        @if (registrationForm.confirmPassword().value()) {
+          <button
+            type="button"
+            matSuffix
+            matIconButton
+            aria-label="Clear"
+            tabindex="-1"
+            (click)="registrationForm.confirmPassword().value.set('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+        @if (registrationForm.confirmPassword().touched() && registrationForm.confirmPassword().invalid()) {
+          @for (error of registrationForm.confirmPassword().errors(); track error.kind) {
+            <mat-error>{{ error.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <div class="actions">
+        <button type="submit" matButton="filled" color="primary" [disabled]="registrationForm().invalid()">Register</button>
+        <button type="button" matButton="outlined" color="second" (click)="onClickCancel()">Cancel</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

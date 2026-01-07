@@ -1,0 +1,36 @@
+@use '@motionui/ui-lib/styles/spacing' as spacing;
+@use '@motionui/ui-lib/styles/color' as color;
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.page-content {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: spacing.$px-per-unit * 4;
+}
+
+.data-table-container {
+  border: 1px solid #c4c6d0;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 65%;
+}
+
+.todos {
+  width: 35%;
+}
+
+td.mat-column-menu {
+  width: 56px;
+  padding: 0 16px;
+}
+
+.mat-mdc-table-sticky-border-elem-right {
+  border-left: 1px solid #c4c6d0;
+}

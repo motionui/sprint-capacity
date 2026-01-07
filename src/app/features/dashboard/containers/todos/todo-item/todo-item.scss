@@ -1,0 +1,49 @@
+@use '@motionui/ui-lib/styles/spacing' as spacing;
+@use '@motionui/ui-lib/styles/color' as color;
+
+.todo-item {
+  border-radius: spacing.$px-per-unit * 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: spacing.$px-per-unit * 2;
+
+  &:hover {
+    background-color: #d5d5d5;
+  }
+
+  &.selected {
+    background-color: #e0e0e0;
+  }
+}
+
+.task-info {
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: spacing.$px-per-unit * 2;
+  overflow: hidden;
+}
+
+.task-text {
+  padding: spacing.$px-per-unit * 2 0;
+  flex: 1;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    .delete-icon {
+      color: #ffa000;
+    }
+  }
+  .delete-icon {
+    color: rgba(0, 0, 0, 0.54);
+    transition: color 150ms ease-in-out;
+  }
+}
